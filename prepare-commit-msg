@@ -1,0 +1,27 @@
+#!/usr/bin/python
+
+import sys
+from textblob import TextBlob
+
+
+def correct_commit_msg():
+    msgfile = sys.argv[1]  # gets the commit file from arg1
+    message = ""
+
+    with open(msgfile) as f:
+        message = f.read()
+
+    with open(msgfile, 'w') as f:
+        f.write(str(TextBlob(message).correct()))
+
+
+def main():
+    # Silently fail the spellcheck if necessary
+    try:
+        correct_commit_msg()
+    except:
+        pass
+
+
+if __name__ == '__main__':
+    main()
